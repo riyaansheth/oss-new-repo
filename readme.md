@@ -51,7 +51,7 @@ oss-onboard/
 
 ---
 
-## Setup Instructions
+## Setup Instructionsa
 
 ### 1. Get a Free Gemini API Key
 1. Go to https://aistudio.google.com/app/apikey
