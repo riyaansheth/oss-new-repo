@@ -1,6 +1,6 @@
 # OSS Onboard Intelligence System
 
-A full-stack virtual mentor that analyzes any public GitHub repository and gives beginner contributors a clear, intelligent path to their first pull request.
+A full-stack web based mentor system that analyzes any public GitHub repository and gives beginner contributors a clear, intelligent path to their first pull request.
 
 ---
 
