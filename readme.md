@@ -2,9 +2,7 @@
 
 A full-stack web based mentor system that analyzes any public GitHub repository and gives beginner contributors a clear, intelligent path to their first pull request.
 
----
-
-## Tech Stack
+Tech Stack
 
 | Layer | Tech |
 |---|---|
@@ -15,11 +13,8 @@ A full-stack web based mentor system that analyzes any public GitHub repository 
 | AI insights | Google Gemini 1.5 Flash (free tier) |
 | File system | fs-extra |
 
----
+Folder Structure
 
-## Folder Structure
-
-```
 oss-onboard/
   backend/
     routes/
