@@ -10,7 +10,7 @@ Tech Stack
 | Backend | Node.js + Express |
 | Git ops | simple-git |
 | GitHub API | Axios |
-| AI insights | Google Gemini 1.5 Flash (free tier) |
+| AI insights | Ollama via groq api |
 | File system | fs-extra |
 
 Folder Structure
