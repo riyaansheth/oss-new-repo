@@ -20,9 +20,9 @@ function RepoCard({ data }) {
       </div>
       <p className="repo-desc">{data.description}</p>
       <div className="repo-stats">
-        <div className="stat">⭐ <strong>{data.stars?.toLocaleString()}</strong> stars</div>
-        <div className="stat">🍴 <strong>{data.forks?.toLocaleString()}</strong> forks</div>
-        <div className="stat">🐛 <strong>{data.openIssues?.toLocaleString()}</strong> open issues</div>
+        <div className="stat"><strong>{data.stars?.toLocaleString()}</strong> stars</div>
+        <div className="stat"><strong>{data.forks?.toLocaleString()}</strong> forks</div>
+        <div className="stat"><strong>{data.openIssues?.toLocaleString()}</strong> open issues</div>
       </div>
     </div>
   );
@@ -32,8 +32,46 @@ function GeminiInsight({ text }) {
   if (!text) return null;
   return (
     <div className="gemini-card">
-      <div className="gemini-label">✨ AI Mentor Insight (Gemini)</div>
+      <div className="gemini-label">AI Mentor Insight (Gemini)</div>
       <p className="gemini-text">{text}</p>
+    </div>
+  );
+}
+
+function GroqInsight({ summary, deepAnalysis, community }) {
+  if (!summary && !deepAnalysis && !community) return null;
+  
+  return (
+    <div className="groq-insights-container">
+      {summary && (
+        <div className="groq-card groq-summary">
+          <div className="groq-label">🤖 AI Summary (Groq - Llama)</div>
+          <p className="groq-text">{summary}</p>
+        </div>
+      )}
+      
+      {deepAnalysis && (
+        <div className="groq-card groq-deep">
+          <div className="groq-label">📊 Technical Deep Dive (Groq)</div>
+          <div className="groq-analysis">
+            {deepAnalysis.split('\n').map((line, i) => {
+              if (line.trim() === '') return null;
+              return (
+                <p key={i} className="groq-analysis-line">
+                  {line.trim()}
+                </p>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      
+      {community && (
+        <div className="groq-card groq-community">
+          <div className="groq-label">👥 Community Insights (Groq)</div>
+          <p className="groq-text">{community}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -146,7 +184,7 @@ export default function App() {
   return (
     <div className="app">
       <div className="header">
-        <div className="header-badge">🔬 Open Source Intelligence</div>
+        <div className="header-badge">Open Source Intelligence</div>
         <h1>OSS Onboard Intelligence System</h1>
         <p>Your AI-powered mentor for making your first open-source contribution with confidence.</p>
       </div>
@@ -164,7 +202,7 @@ export default function App() {
             disabled={loading}
           />
           <button className="analyze-btn" onClick={handleAnalyze} disabled={loading}>
-            {loading ? 'Analyzing...' : '🔍 Analyze'}
+            {loading ? 'Analyzing...' : 'Analyze'}
           </button>
         </div>
         {error && (
@@ -180,7 +218,7 @@ export default function App() {
         <>
           <div className="section">
             <div className="section-title">
-              <span className="icon icon-blue">📦</span>
+              <span className="icon icon-blue"></span>
               Repository Overview
             </div>
             <RepoCard data={result} />
@@ -189,16 +227,30 @@ export default function App() {
           {result.geminiSummary && (
             <div className="section">
               <div className="section-title">
-                <span className="icon icon-purple">✨</span>
+                <span className="icon icon-purple"></span>
                 AI Mentor Summary
               </div>
               <GeminiInsight text={result.geminiSummary} />
             </div>
           )}
 
+          {result.aiInsights && (result.aiInsights.groqSummary || result.aiInsights.groqDeepAnalysis || result.aiInsights.groqCommunity) && (
+            <div className="section">
+              <div className="section-title">
+                <span className="icon icon-purple"></span>
+                AI-Powered Insights (Groq)
+              </div>
+              <GroqInsight 
+                summary={result.aiInsights.groqSummary}
+                deepAnalysis={result.aiInsights.groqDeepAnalysis}
+                community={result.aiInsights.groqCommunity}
+              />
+            </div>
+          )}
+
           <div className="section">
             <div className="section-title">
-              <span className="icon icon-green">📁</span>
+              <span className="icon icon-green"></span>
               Beginner-Friendly Zones
               <span style={{color:'#484f58',fontWeight:'400',fontSize:'13px'}}>— detected from file structure</span>
             </div>
@@ -207,7 +259,7 @@ export default function App() {
 
           <div className="section">
             <div className="section-title">
-              <span className="icon icon-orange">🎯</span>
+              <span className="icon icon-orange"></span>
               Recommended First Contribution Files
               <span style={{color:'#484f58',fontWeight:'400',fontSize:'13px'}}>— from git history</span>
             </div>
@@ -216,7 +268,7 @@ export default function App() {
 
           <div className="section">
             <div className="section-title">
-              <span className="icon icon-blue">🗺</span>
+              <span className="icon icon-blue"></span>
               Your Onboarding Roadmap
             </div>
             <OnboardingGuide steps={result.onboardingGuide} />
